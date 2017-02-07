@@ -2,9 +2,16 @@ FROM andrewosh/binder-base
 
 USER root
 
-# Add dependency
-RUN apt-get update
-RUN apt-get install -y ncbi-blast+
+# Add dependencies using conda and the bioconda channel
+# https://bioconda.github.io/#set-up-channels
+RUN conda config --add channels conda-forge
+RUN conda config --add channels defaults
+RUN conda config --add channels r
+RUN conda config --add channels bioconda
+
+# Install NCBI BLAST+ 2.6.0 using conda
+# https://anaconda.org/bioconda/blast
+conda install -c bioconda blast=2.6.0
 
 USER main
 
