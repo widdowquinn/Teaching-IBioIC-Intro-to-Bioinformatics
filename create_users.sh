@@ -10,11 +10,20 @@
 # user1,password1
 # user2,password2
 #
+# Prior to running, assumes you have updated the course material with:
+#
+# cd /home/ibioic/IBioIC/Teaching-IBioIC-Intro-to-Bioinformatics
+# git checkout master
+# git pull
+#
 # Run this script as su/with sudo to delete all old user data, and recreate
 # the users:
 #
 # sudo create_users.sh > create_users.log
 
+
+# In order to use the mkpasswd command,
+apt-get install -y whois
 for udetails in `cat users.txt`
 do
 
@@ -26,7 +35,9 @@ do
     mkcmd="useradd -m -d /home/${user} -p `mkpasswd ${pass}` ${user}"
     echo ${mkcmd}
     ${mkcmd}
-    cpcmd="cp -R /home/ibioic/Teaching-IBioIC-Intro-to-Bioinformatics /home/${user}"
+    # Root account uses $HOME/IBioIC/Teaching-IBioIC-Intro-to-Bioinformatics
+    # but user accounts $HOME/Teaching-IBioIC-Intro-to-Bioinformatics
+    cpcmd="cp -R /home/ibioic/IBioIC/Teaching-IBioIC-Intro-to-Bioinformatics /home/${user}"
     echo ${cpcmd}
     ${cpcmd}
 done
