@@ -21,6 +21,9 @@
 #
 # sudo create_users.sh > create_users.log
 
+
+# In order to use the mkpasswd command,
+apt-get install -y whois
 for udetails in `cat users.txt`
 do
 
